@@ -27,13 +27,15 @@ const Preset = ({
   return (
     <div className="flex-1 flex items-center mx-auto justify-center">
       <div className="flex gap-4 flex-col items-center w-full">
-        <Image
-          alt="loggo"
-          src={"/image.png"}
-          className="rounded-full"
-          width={100}
-          height={100}
-        />
+        <div className="w-[110px] h-[110px] bg-white rounded-full p-5 flex items-center justify-center">
+          <Image
+            alt="loggo"
+            src={"/image.png"}
+            className="object-contain w-[100px] h-[100px]"
+            width={100}
+            height={100}
+          />
+        </div>
         <h1 className="text-xl ">Try asking one of these questions</h1>
 
         <div className="flex items-center flex-wrap justify-center gap-3">
