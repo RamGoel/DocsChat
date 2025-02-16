@@ -1,5 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import fs from "fs/promises";
 import { NextResponse } from "next/server";
+import path from "path";
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_KEY || "");
 
@@ -14,10 +16,13 @@ const getGeminiResponse = async (query: string) => {
       systemInstruction: SYSTEM_PROMPT,
     });
 
-    const docs = await fetch("/docs.txt")
-      .then((response) => response.text())
-      .then((text) => text)
-      .catch((error) => console.error("Error reading file:", error));
+    const filePath = path.join(process.cwd(), "public", "docs.txt");
+
+    console.log(filePath);
+
+    const fileContent = await fs.readFile(filePath, "utf-8");
+
+    console.log(fileContent);
 
     const PROMPT = `
       The user is trying to understand CrustData and have a query: ${query} \n
@@ -25,7 +30,7 @@ const getGeminiResponse = async (query: string) => {
       You have to read the documentation and reply to the user.
 
       Here is the documentation:
-      ${docs}
+      ${fileContent}
     `;
     const modelResponse = await model.generateContent(PROMPT);
     const response = modelResponse.response.text();
