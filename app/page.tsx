@@ -2,7 +2,6 @@
 import Header from "@/components/Header";
 import MessageCard from "@/components/MessageCard";
 import Preset from "@/components/Preset";
-import { getGeminiResponse } from "@/lib/gemini";
 import { Message } from "@/types/message";
 import { Loader2, Send } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
@@ -33,9 +32,15 @@ export default function Home() {
     setNewMessageText("");
     setLoading(true);
 
-    const botMessageText = await getGeminiResponse(
-      overWriteMessage ?? newMessageText,
-    );
+    const response = await fetch("/api/ai", {
+      method: "POST",
+      body: JSON.stringify({
+        query: overWriteMessage ?? newMessageText,
+      }),
+    });
+
+    const parsedResponse = await response.json();
+    const botMessageText = parsedResponse.response;
 
     const botMesage: Message = {
       id: String(messages.length) + 2,
@@ -76,7 +81,7 @@ export default function Home() {
       )}
 
       <div className="w-full h-[120px] flex items-center justify-center">
-        <div className="bg-neutral-800 shadow-2xl shadow-violet-500/20 flex items-center w-3/4 p-2 pl-5 rounded-full">
+        <div className="bg-neutral-800 shadow-2xl shadow-violet-500/20 flex items-center w-11/12 lg:w-3/4 p-2 pl-5 rounded-full">
           <input
             className="bg-transparent border-none placeholder:opacity-60 h-[40px] w-full ring-0 focus-visible:outline-none"
             value={newMessageText}

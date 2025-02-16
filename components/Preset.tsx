@@ -5,7 +5,7 @@ const questions = [
   {
     id: 1,
     icon: <MessageCircleQuestion />,
-    text: "What is Crusdata?",
+    text: "What is Crustdata?",
   },
   {
     id: 2,

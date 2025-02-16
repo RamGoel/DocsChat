@@ -7,7 +7,7 @@ const MessageCard = ({ message }: { message: Message }) => {
       className={`flex gap-2 justify-center flex-col ${message.type === "user" ? "items-end" : ""}`}
     >
       <div
-        className={`p-4 rounded-lg max-w-[60%] text-sm w-fit ${message.type === "user" ? "bg-blue-600" : "bg-neutral-700"} text-white`}
+        className={`p-4 rounded-lg max-w-[90%] lg:max-w-[60%] text-sm w-fit ${message.type === "user" ? "bg-blue-600" : "bg-neutral-700"} text-white`}
       >
         <Markdown
           components={{
