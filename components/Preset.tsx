@@ -1,7 +1,7 @@
+import { motion } from "framer-motion";
 import { HelpCircle, ListCheck, MessageCircleQuestion } from "lucide-react";
 import Image from "next/image";
-
-const questions = [
+export const questions = [
   {
     id: 1,
     icon: <MessageCircleQuestion />,
@@ -38,18 +38,34 @@ const Preset = ({
         </div>
         <h1 className="text-xl ">Try asking one of these questions</h1>
 
-        <div className="flex items-center flex-wrap justify-center gap-3">
-          {questions.map((item) => (
-            <button
+        <motion.div
+          className="flex items-center flex-wrap justify-center gap-3"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.2,
+              },
+            },
+          }}
+        >
+          {questions.map((item, index) => (
+            <motion.button
               key={item.id}
               onClick={() => onOptionClick(item.text)}
               className="bg-amber-600/30 text-sm flex items-center gap-2 border-2 border-amber-600 text-amber-600 hover:scale-95 transition-all cursor-pointer py-2 px-4 rounded-full text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
             >
               {item.icon}
               <p>{item.text}</p>
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
