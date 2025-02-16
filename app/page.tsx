@@ -140,19 +140,19 @@ const MessageCard = ({ message }: { message: Message }) => {
       >
         <Markdown
           components={{
-            h1: ({ _, ...props }) => (
+            h1: ({ ...props }) => (
               <h1 className="text-3xl font-bold" {...props} />
             ),
-            h2: ({ _, ...props }) => (
+            h2: ({ ...props }) => (
               <h2 className="text-2xl font-semibold" {...props} />
             ),
-            a: ({ _, ...props }) => (
+            a: ({ ...props }) => (
               <a className="text-blue-500 underline" {...props} />
             ),
-            code: ({ _, ...props }) => (
+            code: ({ ...props }) => (
               <code className="bg-neutral-800 rounded-lg p-1" {...props} />
             ),
-            pre: ({ _, ...props }) => (
+            pre: ({ ...props }) => (
               <pre
                 className="bg-gray-900 break-all text-white p-4 rounded-md overflow-x-auto"
                 {...props}
