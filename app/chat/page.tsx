@@ -84,7 +84,7 @@ export default function Home() {
         <div className=" w-11/12 lg:w-3/4">
           {messages.length > 0 ? (
             <motion.div
-              className="relative"
+              className="relative w-[300px]"
               initial="hidden"
               animate="visible"
               variants={{
