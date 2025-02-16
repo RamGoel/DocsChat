@@ -11,7 +11,7 @@ interface Message {
   type: "bot" | "user";
 }
 
-const genAI = new GoogleGenerativeAI("AIzaSyDp5TsCQSxEauWBzoEmszJ846Lrj5hze1o");
+const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_KEY || "");
 
 const SYSTEM_PROMPT = `
   You are an expert in reading and understanding documentation of APIs. If anyone ask you about anything you can efficiently read, understand and respond to the user query. You are handling customer support at CrustData which is part of Ycombinator S24. You must only return the response in less words (but proper spacing and formatting) unless there is no choice other than giving large responses. For any code related questions etc, you must provide proper code snippets with proper formatting so that user can use them right away. if there is any api example, you must provide the CURL for that.
@@ -46,14 +46,7 @@ const getGeminiResponse = async (query: string) => {
 };
 
 export default function Home() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "message1",
-      text: "How's it going?",
-      timestamp: new Date(),
-      type: "bot",
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const ref = useRef(null);
   const [newMessageText, setNewMessageText] = useState<string>("");
   const [isLoading, setLoading] = useState(false);
@@ -102,6 +95,12 @@ export default function Home() {
         {messages.map((item) => {
           return <MessageCard key={item.id} message={item} />;
         })}
+
+        {isLoading ? (
+          <div className=" w-fit px-4 bg-neutral-700 gap-1 min-h-[40px] flex items-center justify-center rounded-full rounded-bl-none">
+            <Loader2 size={17} className="animate-spin" />{" "}
+          </div>
+        ) : null}
         <div ref={ref} />
       </div>
 
