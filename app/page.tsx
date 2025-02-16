@@ -49,12 +49,12 @@ export default function Home() {
   };
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-screen flex w-full lg:w-[60%] mx-auto flex-col">
       <Header />
       {messages.length ? (
         <div
           id="message-box"
-          className="flex-1 mobile-scrollbar overflow-y-auto gap-3 flex flex-col w-[60%] mx-auto p-5"
+          className="flex-1 mobile-scrollbar overflow-y-auto gap-3 flex flex-col p-5"
         >
           {messages.map((item) => {
             return <MessageCard key={item.id} message={item} />;
@@ -76,7 +76,7 @@ export default function Home() {
       )}
 
       <div className="w-full h-[120px] flex items-center justify-center">
-        <div className="bg-neutral-800 shadow-2xl shadow-violet-500/20 flex items-center w-1/3 p-2 pl-5 rounded-full">
+        <div className="bg-neutral-800 shadow-2xl shadow-violet-500/20 flex items-center w-3/4 p-2 pl-5 rounded-full">
           <input
             className="bg-transparent border-none placeholder:opacity-60 h-[40px] w-full ring-0 focus-visible:outline-none"
             value={newMessageText}

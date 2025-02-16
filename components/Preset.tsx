@@ -25,7 +25,7 @@ const Preset = ({
   onOptionClick: (query: string) => void;
 }) => {
   return (
-    <div className="flex-1 w-[60%] flex items-center mx-auto justify-center">
+    <div className="flex-1 flex items-center mx-auto justify-center">
       <div className="flex gap-4 flex-col items-center w-full">
         <Image
           alt="loggo"
@@ -36,7 +36,7 @@ const Preset = ({
         />
         <h1 className="text-xl ">Try asking one of these questions</h1>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center flex-wrap justify-center gap-3">
           {questions.map((item) => (
             <button
               key={item.id}
