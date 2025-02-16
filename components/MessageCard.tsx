@@ -29,6 +29,9 @@ const MessageCard = ({ message }: { message: Message }) => {
                 {...props}
               />
             ),
+            ul: ({ ...props }) => <ul className="list-disc" {...props} />,
+            li: ({ ...props }) => <li className="ml-4" {...props} />,
+            br: () => null,
           }}
           className={"whitespace-pre-wrap leading-relaxed font-sans"}
         >

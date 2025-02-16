@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DocsChat - AI-Powered Docs Chatbot
 
-## Getting Started
+DocsChat is an open-source Retrieval-Augmented Generation (RAG) layer that allows you to turn any company's documentation into an AI-powered chatbot. Simply clone the repo, replace the docs, set up your API key, and start chatting with your documentation!
 
-First, run the development server:
+## 🚀 What DocsChat Does
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Converts your documentation into an AI-powered chatbot
+- Uses the Gemini model to provide accurate answers
+- Easy to set up—just update a single file and add an environment variable
+- Completely open-source and customizable
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔥 Use Cases
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Internal Team Support**: Help your team quickly find answers in your company’s docs
+- **Customer Support**: Provide instant responses based on documentation
+- **Developer Assistance**: Turn API or technical documentation into a chatbot
+- **Knowledge Management**: Make searching through long documents easier
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ How to Set Up
 
-## Learn More
+1. **Clone the Repository**
+   ```sh
+   git clone https://github.com/RamGoel/DocsChat.git
+   cd DocsChat
+   ```
+2. **Replace Documentation**
+   - Update `public/docs.txt` with your own documentation.
+3. **Set Up Environment Variable**
+   - Create a `.env` file and add your Google API Key:
+     ```sh
+     GOOGLE_KEY=your_google_api_key
+     ```
+4. **Run the App**
+   ```sh
+   npm install  # Install dependencies
+   npm start    # Start the chatbot
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+## 🛡️ Built By
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Made with ❤️ by [RamGoel](https://github.com/RamGoel).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⭐ Star the Repo
 
-## Deploy on Vercel
+If you find this project useful, don’t forget to give it a ⭐ on GitHub!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[GitHub Repo](https://github.com/RamGoel/DocsChat)

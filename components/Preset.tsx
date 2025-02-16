@@ -5,17 +5,17 @@ const questions = [
   {
     id: 1,
     icon: <MessageCircleQuestion />,
-    text: "What is Crustdata?",
+    text: "What is DocsChat?",
   },
   {
     id: 2,
     icon: <HelpCircle />,
-    text: "How you can help me?",
+    text: "List all the usecases?",
   },
   {
     id: 3,
     icon: <ListCheck />,
-    text: "List all the APIs I can use",
+    text: "How to setup DocsChat for myself?",
   },
 ];
 

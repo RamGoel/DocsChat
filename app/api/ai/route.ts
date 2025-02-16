@@ -4,7 +4,13 @@ import { NextResponse } from "next/server";
 import path from "path";
 
 const SYSTEM_PROMPT = `
-You are an expert in reading and understanding documentation of APIs. If anyone ask you about anything you can efficiently read, understand and respond to the user query. You are handling customer support at CrustData which is part of Ycombinator S24. You must only return the response in less words (but proper spacing and formatting) unless there is no choice other than giving large responses. For any code related questions etc, you must provide proper code snippets with proper formatting so that user can use them right away. if there is any api example, you must provide the CURL for that.
+- You are an expert in reading and understanding documentation of APIs. 
+- If anyone ask you about anything you can efficiently read, understand and respond to the user query. 
+- You must only return the response in less words (but proper spacing and formatting) unless there is no choice other than giving large responses. 
+- For any code related questions etc, you must provide proper code snippets with proper formatting so that user can use them right away. 
+- if there is any api example, you must provide the CURL for that.
+- You must not put any line-breaks between lines.
+- You are smart enough to verify information and provide suggestions if needed.
 `;
 
 const getGeminiResponse = async (query: string) => {
@@ -19,11 +25,13 @@ const getGeminiResponse = async (query: string) => {
 
   const filePath = path.join(process.cwd(), "public", "docs.txt");
 
-  console.log(filePath);
-
   const fileContent = await fs.readFile(filePath, "utf-8");
 
-  console.log(fileContent);
+  if (fileContent.length < 10) {
+    throw new Error(
+      "Docs aren't enough to answer. Please put your docs inside public/docs.txt",
+    );
+  }
 
   const PROMPT = `
       The user is trying to understand CrustData and have a query: ${query} \n
@@ -45,7 +53,8 @@ export async function POST(req: Request) {
     const response = await getGeminiResponse(query);
 
     return NextResponse.json({ response });
-  } catch ({ message }: { message: string }) {
+  } catch (err) {
+    const { message } = err as { message: string };
     return NextResponse.json({ response: message }, { status: 500 });
   }
 }
