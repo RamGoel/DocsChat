@@ -9,12 +9,18 @@ const Header = () => {
         <Image alt="logo" src={"/image.png"} width={40} height={40} />
       </div>
 
-      <p className="text-lg font-mono">
+      <p className="text-lg">
         DocsChat{" "}
         <span className="hidden md:inline">- Ask anything about your Docs</span>
       </p>
-      <Link href={"https://github.com/RamGoel/DocsChat"}>
-        <Github />
+      <Link
+        target="_blank"
+        className="text-sm"
+        href={"https://github.com/RamGoel/DocsChat"}
+      >
+        <button className="flex gap-2 items-center bg-neutral-600 px-3 hover:bg-neutral-700 transition-all py-2 rounded-full">
+          <Github size={18} /> Star on Github
+        </button>
       </Link>
     </div>
   );

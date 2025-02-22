@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const page = () => {
+const HomePage = () => {
   return (
     <div className="flex-1 flex items-center justify-center">
       <div className="flex max-w-3/4 items-center flex-col gap-4">
@@ -15,13 +15,14 @@ const page = () => {
             height={100}
           />
         </div>{" "}
-        <p className="w-[500px] text-center">
+        <h1 className="text-6xl font-semibold">Ask your Documentation</h1>
+        <p className="w-3/4 text-center">
           DocsChat, a RAG layer on top of your docs. You can clone the
           repository, replace the content of <code>public/docs.txt</code>, with
           your docs, self host and use this.
         </p>
         <Link href={"/chat"}>
-          <button className="bg-white text-black px-3 py-2 rounded-lg flex items-center gap-2 font-semibold hover:scale-90 transition-all">
+          <button className="bg-white text-black px-3 py-2 rounded-lg flex items-center gap-2  hover:scale-90 transition-all">
             Try Demo <ArrowUpRight />
           </button>
         </Link>
@@ -30,4 +31,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default HomePage;

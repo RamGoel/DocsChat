@@ -1,9 +1,10 @@
 "use client";
 import MessageCard from "@/components/MessageCard";
 import Preset, { questions } from "@/components/Preset";
+import { STORAGE_KEYS, StorageUtil } from "@/services/storage";
 import { Message } from "@/types/message";
 import { motion } from "framer-motion";
-import { ChevronUp, Loader2, Send } from "lucide-react";
+import { ChevronUp, Loader2, Send, Trash } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -18,7 +19,15 @@ export default function Home() {
     if (ref.current) {
       (ref.current as HTMLDivElement)?.scrollIntoView({ behavior: "smooth" });
     }
+    if (messages.length) StorageUtil.setItem(STORAGE_KEYS.CHAT, messages);
   }, [messages]);
+
+  useEffect(() => {
+    const data = StorageUtil.getItem(STORAGE_KEYS.CHAT);
+    if (data) {
+      setMessages(data);
+    }
+  }, []);
 
   // handles fetching of response
   const handleMessageSend = async (overWriteMessage?: string) => {
@@ -52,6 +61,15 @@ export default function Home() {
 
     setMessages((old) => [...old, botMesage]);
     setLoading(false);
+  };
+
+  const handleClearChat = () => {
+    const wantToDelete = confirm("Do you really want to clear chat");
+
+    if (wantToDelete) {
+      setMessages([]);
+      StorageUtil.deleteItem(STORAGE_KEYS.CHAT);
+    }
   };
 
   return (
@@ -125,7 +143,7 @@ export default function Home() {
             </motion.div>
           ) : null}
           <div
-            className={`bg-neutral-800 shadow-2xl shadow-violet-500/20 flex items-center p-2 pl-5 ${messages.length > 0 ? "rounded-b-2xl" : "rounded-full"}`}
+            className={`bg-neutral-800 gap-2 shadow-2xl shadow-violet-500/20 flex items-center p-2 pl-5 ${messages.length > 0 ? "rounded-b-2xl" : "rounded-full"}`}
           >
             <input
               className="bg-transparent border-none placeholder:opacity-60 h-[40px] w-full ring-0 focus-visible:outline-none"
@@ -141,13 +159,20 @@ export default function Home() {
             <button
               onClick={() => handleMessageSend()}
               disabled={isLoading || newMessageText.length === 0}
-              className="min-w-[40px] disabled:opacity-50 h-[40px] rounded-full bg-neutral-900 hover:bg-neutral-700 transition-all flex items-center justify-center"
+              className="min-w-[40px] disabled:opacity-50 h-[40px] disabled:cursor-not-allowed rounded-full bg-neutral-900 hover:bg-neutral-700 transition-all flex items-center justify-center"
             >
               {isLoading ? (
                 <Loader2 size={17} className="animate-spin" />
               ) : (
                 <Send size={17} />
               )}
+            </button>
+            <button
+              onClick={handleClearChat}
+              disabled={messages.length === 0}
+              className="min-w-[40px] disabled:opacity-50 h-[40px] disabled:cursor-not-allowed rounded-full bg-neutral-900 hover:bg-red-600 hover:text-white transition-all flex items-center justify-center"
+            >
+              <Trash size={17} />
             </button>
           </div>
         </div>
